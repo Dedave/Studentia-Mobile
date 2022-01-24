@@ -1,0 +1,21 @@
+
+  <ion-toolbar>
+    <ion-title>
+      List of Students
+    </ion-title>
+  </ion-toolbar>
+
+<ion-content class="ion-margin">
+  
+  <ion-card *ngFor="let student of students" (click)='getstudentId(student._id)'>
+    <br>
+      <ion-label>{{student.first_name  | titlecase}} {{student.last_name  | titlecase}}</ion-label>
+    <ion-card-content>
+      <ion-row>
+        <ion-col>* {{student.department  | titlecase}}</ion-col>
+        <ion-col>* {{student.level}} Level</ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+

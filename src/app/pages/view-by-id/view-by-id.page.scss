@@ -1,0 +1,33 @@
+ion-title,ion-card-title {
+    text-align: center;
+    color: rgb(105, 105, 105); 
+}
+ion-card{
+    background-color: rgb(14, 143, 126); 
+    color: white; 
+}
+ion-label{
+    font-size: 16px;
+    color:rgb(219, 235, 232); 
+
+}
+
+span{
+    font-size: 18px;
+    color: white;
+}
+ion-icon{
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;  
+    
+    color: rgb(135, 197, 189); 
+}
+ion-icon:hover{
+    cursor:pointer;
+    color:white;
+}
+ion-button{
+    background-color:rgb(14, 143, 126); 
+    color:white;
+}
