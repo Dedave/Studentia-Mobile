@@ -60,7 +60,8 @@ export class ViewByIdPage implements OnInit {
       toast.present();
 
     this.student = result.student;
-    // this._route.navigateByUrl('/tab/tab')
+    window.location.href = '/tab/tab/list';
+    // this._route.navigateByUrl('/tab/tab/list')
     })
   }
 
