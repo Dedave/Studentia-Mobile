@@ -52,14 +52,16 @@ export class ViewByIdPage implements OnInit {
     })
   }
   delById(){
+    this.isOpen = true;
     this.activity.delStudentById(this.student._id ).subscribe(async (result: any)=>{
-      const toast = await this.toastController.create({
+       const toast = await this.toastController.create({
         message: 'Student record deleted successfully!!',
         duration: 3000
       });
       toast.present();
 
     this.student = result.student;
+    
     window.location.href = '/tab/tab/list';
     // this._route.navigateByUrl('/tab/tab/list')
     })

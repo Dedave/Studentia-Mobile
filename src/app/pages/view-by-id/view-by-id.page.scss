@@ -1,11 +1,15 @@
 ion-title,ion-card-title {
-    text-align: center;
-    color: rgb(105, 105, 105); 
-}
+        text-align: center;
+        color: rgb(14, 143, 126); 
+ }
 ion-card{
     background-color: rgb(14, 143, 126); 
     color: white; 
 }
+ion-item{
+    color: rgb(14, 143, 126); 
+}
+
 ion-label{
     font-size: 16px;
     color:rgb(219, 235, 232); 
@@ -30,4 +34,10 @@ ion-icon:hover{
 ion-button{
     background-color:rgb(14, 143, 126); 
     color:white;
+}
+ion-tab-button:hover{
+    color:rgb(14, 143, 126);
+}
+ion-tab-button{
+    color:grey;
 }
