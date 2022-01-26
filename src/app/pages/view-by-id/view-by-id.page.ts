@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivityService } from 'src/app/services/activity.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-view-by-id',
@@ -15,7 +15,10 @@ export class ViewByIdPage implements OnInit {
   isOpen = false;
   showEdit = true;
   faculty: any;
-  constructor(private activity: ActivityService, private activeRoute: ActivatedRoute, private  _route: Router,  public toastController: ToastController ) { }
+  constructor(private activity: ActivityService, 
+    private activeRoute: ActivatedRoute, private  _route: Router, 
+     public toastController: ToastController, 
+     public alertController: AlertController ) { }
 
   ngOnInit():void {
     this.activeRoute.params.subscribe((result)=>{
@@ -52,8 +55,25 @@ export class ViewByIdPage implements OnInit {
     })
   }
   
-  delById(){
-    this.activity.delStudentById(this.student._id ).subscribe(async (result: any)=>{
+    async  delById(){
+       const alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Alert',
+        subHeader: 'Confirm Delete',
+        message: 'Do you confirm to delete?',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Yes',
+            handler: () => {
+              this.activity.delStudentById(this.student._id ).subscribe(async (result: any)=>{
+     
        const toast = await this.toastController.create({
         message: 'Student record deleted successfully!!',
         duration: 3000
@@ -64,6 +84,14 @@ export class ViewByIdPage implements OnInit {
     //window.location.href = '/tab/tab/list';
     this._route.navigate(['/tab/list'],{queryParams:{reload:true}})
     })
+            }
+          }
+        ]
+      });
+      alert.present();
+
+      
+         
   }
 
 }
