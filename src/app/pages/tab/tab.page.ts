@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router} from '@angular/router';
 @Component({
   selector: 'app-tab',
   templateUrl: './tab.page.html',
@@ -7,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabPage implements OnInit {
 
-  constructor() { }
+  constructor(private _route: Router) { }
 
   ngOnInit() {
     
+  }
+  reset(){
+    this._route.navigate(['/tab/list'])
   }
 
 }
