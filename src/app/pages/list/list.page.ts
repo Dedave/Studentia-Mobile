@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActivityService } from 'src/app/services/activity.service';
 import { LoadingController } from '@ionic/angular';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-list',
@@ -10,7 +11,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class ListPage implements OnInit {
   students: any;
-  error: any;
+  error = false;
   constructor(private actRoute:ActivatedRoute, private activity: ActivityService, private  _route: Router,public loadingController: LoadingController ) {
     this.actRoute.queryParams.subscribe((res)=>{
       if(res['reload']){
@@ -49,11 +50,10 @@ this.getStudents()
     console.log("Error info",error)
     }
     )
-
-  
   }
   pageLoad(){
     this.getStudents();
+    this.error =false;
   }
 
 
