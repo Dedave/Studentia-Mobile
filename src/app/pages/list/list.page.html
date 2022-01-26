@@ -5,7 +5,7 @@
     </ion-title>
   </ion-toolbar>
 
-<ion-content class="ion-margin">
+<ion-content class="ion-margin" *ngIf="students">
   
   <ion-card *ngFor="let student of students" (click)='getstudentId(student._id)'>
     <br>
@@ -18,4 +18,13 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
+
+<!-- error issue -->
+      <ion-content class="ion-margin" *ngIf="error" style="text-align: center;">
+        <ion-card style="background-color: grey">
+<h3>Server Error</h3>
+<p>Unable to fetch Students</p>
+<ion-button (click)= "pageLoad()">Retry</ion-button>
+</ion-card>
+  </ion-content>
 
