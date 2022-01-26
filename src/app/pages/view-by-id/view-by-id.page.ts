@@ -61,9 +61,8 @@ export class ViewByIdPage implements OnInit {
       toast.present();
     this.isOpen = false;
     this.student = result.student;
-    
-    window.location.href = '/tab/tab/list';
-    // this._route.navigateByUrl('/tab/tab/list')
+    //window.location.href = '/tab/tab/list';
+    this._route.navigate(['/tab/list'],{queryParams:{reload:true}})
     })
   }
 

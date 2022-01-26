@@ -7,6 +7,16 @@
 
 <ion-content class="ion-margin" *ngIf="students">
   
+  <!-- Custom Refresher Content -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-card *ngFor="let student of students" (click)='getstudentId(student._id)'>
     <br>
       <ion-label>{{student.first_name  | titlecase}} {{student.last_name  | titlecase}}</ion-label>
@@ -22,9 +32,9 @@
 <!-- error issue -->
       <ion-content class="ion-margin" *ngIf="error" style="text-align: center;">
         <ion-card style="background-color: grey">
-<h3>Server Error</h3>
+<h3 style="background-color: rgb(14, 143, 126); color:darkred;">Server Error !!!</h3>
 <p>Unable to fetch Students</p>
-<ion-button (click)= "pageLoad()">Retry</ion-button>
+<ion-button (click)= "pageLoad()" color="red">Retry</ion-button>
 </ion-card>
   </ion-content>
 
