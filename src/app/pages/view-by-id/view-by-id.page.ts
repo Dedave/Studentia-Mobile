@@ -42,7 +42,7 @@ export class ViewByIdPage implements OnInit {
 
       const toast = await this.toastController.create({
         message: 'Student record updated successfully!!',
-        duration: 3000
+        duration: 2000
       });
       toast.present();
 
@@ -58,8 +58,6 @@ export class ViewByIdPage implements OnInit {
     async  delById(){
        const alert = await this.alertController.create({
         cssClass: 'my-custom-class',
-        header: 'Alert',
-        subHeader: 'Confirm Delete',
         message: 'Do you confirm to delete?',
         buttons: [
           {
@@ -76,7 +74,7 @@ export class ViewByIdPage implements OnInit {
      
        const toast = await this.toastController.create({
         message: 'Student record deleted successfully!!',
-        duration: 3000
+        duration: 2000
       });
       toast.present();
     this.isOpen = false;
