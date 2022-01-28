@@ -58,7 +58,8 @@ export class ViewByIdPage implements OnInit {
     async  delById(){
        const alert = await this.alertController.create({
         cssClass: 'my-custom-class',
-        message: 'Do you confirm to delete?',
+        header: 'Confirm Delete',
+        message: 'Are you sure you want to delete record?',
         buttons: [
           {
             text: 'Cancel',

@@ -2,7 +2,6 @@ ion-card{ background-color:rgb(14, 143, 126);
     color:white;
   }
   ion-label{
-    
     margin-top: 30px;
     padding: 10px;
     font-size: 20px;
@@ -12,6 +11,7 @@ ion-card{ background-color:rgb(14, 143, 126);
     font-size: 14px;
   }
   ion-title{
+    margin:12px;
     text-align: center;
     color: rgb(14, 143, 126);
   }
@@ -24,3 +24,21 @@ ion-card{ background-color:rgb(14, 143, 126);
   ion-button{
     background-color:rgb(14, 143, 126);
   }
+  .search{
+    margin-left:10px; 
+    border: 1px solid whitesmoke;
+    border-radius:5px;
+  }
+  ion-input{
+    color:rgb(14, 143, 126);
+    width:94%;
+    height:30px;
+    margin-bottom:5px;
+  }
+  ion-icon{
+    font-size: 20px;
+    margin-left: 10px;
+    color:rgb(14, 143, 126); 
+  }
+
+  

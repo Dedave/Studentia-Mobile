@@ -12,6 +12,14 @@ import { error } from 'protractor';
 export class ListPage implements OnInit {
   students: any;
   error = false;
+
+  searchTerm:string="";
+  type:string="string";
+
+  setSortParams(param){
+this.type=param.typ;
+}
+
   constructor(private actRoute:ActivatedRoute, private activity: ActivityService, private  _route: Router,public loadingController: LoadingController ) {
     this.actRoute.queryParams.subscribe((res)=>{
       if(res['reload']){
@@ -58,6 +66,7 @@ this.getStudents()
 
 
   doRefresh(event) {
+    this.searchTerm ="";
     this.getStudents(event);
 
   }

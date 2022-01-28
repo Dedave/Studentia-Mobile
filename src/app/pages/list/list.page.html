@@ -3,6 +3,9 @@
     <ion-title>
       List of Students
     </ion-title>
+    <ion-input class="search" type="text" [(ngModel)]="searchTerm" name="searchTerm" placeholder="Search...">
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-input>
   </ion-toolbar>
 
 <ion-content class="ion-margin" *ngIf="students">
@@ -17,7 +20,7 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-card *ngFor="let student of students" (click)='getstudentId(student._id)'>
+  <ion-card *ngFor="let student of students | filter:searchTerm" (click)='getstudentId(student._id)'>
     <br>
       <ion-label>{{student.first_name  | titlecase}} {{student.last_name  | titlecase}}</ion-label>
     <ion-card-content>
