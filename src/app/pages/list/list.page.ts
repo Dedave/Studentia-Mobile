@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActivityService } from 'src/app/services/activity.service';
 import { LoadingController } from '@ionic/angular';
-import { error } from 'protractor';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.page.html',
   styleUrls: ['./list.page.scss'],
 })
-export class ListPage implements OnInit {
+export class ListPage implements OnInit, OnDestroy {
   students: any;
   error = false;
-
   searchTerm:string="";
   type:string="string";
+  subscription: Subscription | undefined;
 
   setSortParams(param){
 this.type=param.typ;
@@ -42,7 +42,7 @@ this.getStudents()
       await loading.present();
     }
     
-    this.activity.getAllStudents().subscribe((result: any)=>{
+   this.subscription = this.activity.getAllStudents().subscribe((result: any)=>{
       this.students = result;
       if(ev){
         ev.target.complete();
@@ -74,5 +74,8 @@ this.getStudents()
  getstudentId(_id: any){
     this._route.navigate([`view-by-id/${_id}`])
   } 
+ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+}
   
 }

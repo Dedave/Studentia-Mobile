@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { ActivityService } from 'src/app/services/activity.service';
 import { ToastController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-create-new',
   templateUrl: './create-new.page.html',
   styleUrls: ['./create-new.page.scss'],
 })
-export class CreateNewPage implements OnInit {
+export class CreateNewPage implements OnInit, OnDestroy{
   
   studentForm:FormGroup;
   isSubmitted = false;
+  subscription: Subscription | undefined;
   constructor( private activity: ActivityService, private formBuilder: FormBuilder, public toastController: ToastController ) { }
 
   ngOnInit() {
@@ -33,8 +35,7 @@ export class CreateNewPage implements OnInit {
       return false;
     }
     else{
-      
-    this.activity.createNew(this.studentForm.value).subscribe(async (result)=>{
+   this.subscription = this.activity.createNew(this.studentForm.value).subscribe(async (result)=>{
        // this.notifyService.showSuccess("Student record created successfully!!", "Creation Successful")
         const toast = await this.toastController.create({
           message: 'Student record created successfully!!',
@@ -45,7 +46,11 @@ export class CreateNewPage implements OnInit {
          this.studentForm.reset();
          this.isSubmitted = false;
       })
+      return true;
     }
 
+  }
+  ngOnDestroy(): void {
+      this.subscription.unsubscribe();
   }
 }

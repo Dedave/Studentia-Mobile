@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivityService } from 'src/app/services/activity.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController, AlertController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-view-by-id',
@@ -15,17 +16,20 @@ export class ViewByIdPage implements OnInit {
   isOpen = false;
   showEdit = true;
   faculty: any;
+  subscription1: Subscription | undefined;
+  subscription2: Subscription | undefined;
+  subscription3: Subscription | undefined;
   constructor(private activity: ActivityService, 
     private activeRoute: ActivatedRoute, private  _route: Router, 
-     public toastController: ToastController, 
-     public alertController: AlertController ) { }
+    public toastController: ToastController, 
+    public alertController: AlertController ) { }
 
   ngOnInit():void {
     this.activeRoute.params.subscribe((result)=>{
       
       this.details = result['id'];
 
-      this.activity.getStudentId(this.details).subscribe((result: any)=>{
+      this.subscription1 = this.activity.getStudentId(this.details).subscribe((result: any)=>{
         this.student = result;
         this.faculty=this.student.faculty
         
@@ -38,7 +42,7 @@ export class ViewByIdPage implements OnInit {
     this.showEdit = false;
   }
   EditStudent(){
-    this.activity.EditStudentId(this.student._id, this.student).subscribe(async (result)=>{
+    this.subscription2 = this.activity.EditStudentId(this.student._id, this.student).subscribe(async (result)=>{
 
       const toast = await this.toastController.create({
         message: 'Student record updated successfully!!',
@@ -71,7 +75,7 @@ export class ViewByIdPage implements OnInit {
           {
             text: 'Yes',
             handler: () => {
-              this.activity.delStudentById(this.student._id ).subscribe(async (result: any)=>{
+              this.subscription3 = this.activity.delStudentById(this.student._id ).subscribe(async (result: any)=>{
      
        const toast = await this.toastController.create({
         message: 'Student record deleted successfully!!',
@@ -87,10 +91,14 @@ export class ViewByIdPage implements OnInit {
           }
         ]
       });
-      alert.present();
-
-      
+      alert.present(); 
          
+  }
+  ngOndestroy(){
+    this.subscription1.unsubscribe();
+    this.subscription2.unsubscribe();
+    this.subscription3.unsubscribe();
+
   }
 
 }
